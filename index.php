@@ -44,12 +44,26 @@
         </form>
     </div>
     <div class="prawy">
-
+    <h2>Aktualny kurs USD/PLN:</h2>
+    <p id="usd-to-pln">Ładowanie kursu...</p>
     </div>
 
 
     <script>
+    document.addEventListener("DOMContentLoaded", function() {
+            const url = "https://api.exchangerate-api.com/v4/latest/USD"; // API endpoint
 
+            fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const usdToPln = data.rates.PLN; // Pobranie kursu USD/PLN
+                const usdToPlnElement = document.getElementById("usd-to-pln");
+                usdToPlnElement.textContent = usdToPln;
+            })
+            .catch(error => {
+                console.log("Wystąpił błąd podczas pobierania kursu USD/PLN:", error);
+            });
+        });
     </script>
     <?php
         mysqli_close($dbconn);
