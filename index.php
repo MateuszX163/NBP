@@ -1,3 +1,7 @@
+<?php
+    require_once "dbconnect.php";
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -18,11 +22,22 @@
     <div class="lewy">
         <form method="POST" action="index.php">
             <table>
-                <tr><td><label for="kwota">Kwota:</label></td><td><label for="walutaz">Waluta źródłowa:</label></td><td><label for="walutad">Waluta docelowa:</label></td></tr>
-                <tr><td><input name="kwota" id="kwota" type="text"></td><td><input name="walutaz" id="walutaz" type="text"></td><td><input name="walutad" id="walutad" type="text"></td></tr>
-                <tr>
-                    <td colspan="3"><center><input type="submit"></center></td>
-                </tr>
+            <h3>Waluta źródłowa</h3>
+                </select>
+                    <select name="src" id="src">
+                    <option value="EUR">EURO (EUR)</option>
+                    <option value="USD">Dolar Amerykański (USD)</option>
+                    <option value="PLN">Polski Złoty (PLN)</option>
+                </select>
+                <h3>Waluta docelowa</h3>
+                </select>
+                    <select name="des" id="des">
+                    <option value="EUR">EURO (EUR)</option>
+                    <option value="USD">Dolar Amerykański (USD)</option>
+                    <option value="PLN">Polski Złoty (PLN)</option>
+                </select>
+                    <input type="submit">
+                <p> Obsługiwane waluty: USD, PLN, EUR</p>
 
             </table>
         </form>
@@ -35,5 +50,8 @@
     <script>
 
     </script>
+    <?php
+        mysqli_close($dbconn);
+    ?>
 </body>
 </html>
