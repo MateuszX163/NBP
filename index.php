@@ -49,11 +49,13 @@
     </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function()
+    {
         const form = document.querySelector('form'); // Pobieramy formularz
         const kursParagraph = document.getElementById('usd-to-pln'); // Pobieramy paragraf, gdzie wyświetlimy kurs
 
-        form.addEventListener('submit', function(event) {
+        form.addEventListener('submit', function(event)
+        {
             event.preventDefault(); // Zapobiegamy domyślnej akcji formularza
 
             const srcCurrency = document.getElementById('src').value; // Pobieramy walutę źródłową
@@ -78,9 +80,45 @@
         });
     });
 </script>
-
 <?php
-    mysqli_close($dbconn);
+    require_once "dbconnect.php"; // Połączenie z bazą danych
+
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Odczytaj dane z formularza
+        $srcCurrency = mysqli_real_escape_string($dbconn, $_POST['src']);
+        $desCurrency = mysqli_real_escape_string($dbconn, $_POST['des']);
+        $amount = mysqli_real_escape_string($dbconn, $_POST['kwota']);
+
+        // Pobierz aktualny kurs z wybranego źródła (np. API)
+        $api_url = 'https://api.exchangerate-api.com/v4/latest/' . $srcCurrency;
+        $exchange_rate_data = json_decode(file_get_contents($api_url), true);
+        $exchange_rate = $exchange_rate_data['rates'][$desCurrency];
+
+        // Wylicz kwotę przeliczoną
+        $result = $amount * $exchange_rate;
+
+        // Przygotowanie zapytania SQL do wstawienia danych do bazy
+        $sql = "INSERT INTO przeliczenia (waluta_zrodlowa, waluta_docelowa, kwota_zrodlowa, kwota_docelowa, kurs) VALUES (?, ?, ?, ?, ?)";
+
+        // Wykonanie zapytania przy użyciu prepared statements
+        if($stmt = mysqli_prepare($dbconn, $sql)){
+            // Przypisanie parametrów do prepared statements
+            mysqli_stmt_bind_param($stmt, "ssdds", $srcCurrency, $desCurrency, $amount, $result, $exchange_rate);
+
+            // Wykonanie prepared statements
+            if(mysqli_stmt_execute($stmt)) {
+                echo "Dane zostały pomyślnie zapisane.";
+            } else {
+                echo "Coś poszło nie tak. Spróbuj ponownie później.";
+            }
+        }
+
+        // Zamknięcie statement
+        mysqli_stmt_close($stmt);
+
+        // Zamknięcie połączenia z bazą danych
+        mysqli_close($dbconn);
+    }
 ?>
 </body>
 </html>
