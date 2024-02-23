@@ -29,6 +29,7 @@
                     <option value="USD">Dolar Amerykański (USD)</option>
                     <option value="PLN">Polski Złoty (PLN)</option>
                 </select>
+                <input type="text" id=valsrc>
                 <h3>Waluta docelowa</h3>
                 </select>
                     <select name="des" id="des">
@@ -36,6 +37,7 @@
                     <option value="USD">Dolar Amerykański (USD)</option>
                     <option value="PLN">Polski Złoty (PLN)</option>
                 </select>
+                <input type="text" id=valdes>
                     <input type="submit">
                 <p> Obsługiwane waluty: USD, PLN, EUR</p>
 
