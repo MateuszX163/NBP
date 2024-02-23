@@ -45,7 +45,7 @@
     </div>
     <div class="prawy">
     <h2>Aktualny kurs:</h2>
-    <p id="usd-to-pln">Ładowanie kursu...</p>
+    <p id="usd-to-pln">Wybierz walutę źródłową, docelową oraz podaj wartość</p>
     </div>
 
 <script>
