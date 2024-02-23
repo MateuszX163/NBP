@@ -44,29 +44,43 @@
         </form>
     </div>
     <div class="prawy">
-    <h2>Aktualny kurs USD/PLN:</h2>
+    <h2>Aktualny kurs:</h2>
     <p id="usd-to-pln">Ładowanie kursu...</p>
     </div>
 
-
-    <script>
+<script>
     document.addEventListener("DOMContentLoaded", function() {
-            const url = "https://api.exchangerate-api.com/v4/latest/USD"; // API endpoint
+        const form = document.querySelector('form'); // Pobieramy formularz
+        const kursParagraph = document.getElementById('usd-to-pln'); // Pobieramy paragraf, gdzie wyświetlimy kurs
 
-            fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                const usdToPln = data.rates.PLN; // Pobranie kursu USD/PLN
-                const usdToPlnElement = document.getElementById("usd-to-pln");
-                usdToPlnElement.textContent = usdToPln;
-            })
-            .catch(error => {
-                console.log("Wystąpił błąd podczas pobierania kursu USD/PLN:", error);
-            });
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Zapobiegamy domyślnej akcji formularza
+
+            const srcCurrency = document.getElementById('src').value; // Pobieramy walutę źródłową
+            const desCurrency = document.getElementById('des').value; // Pobieramy walutę docelową
+            const amount = parseFloat(document.querySelector('input[name="kwota"]').value); // Pobieramy wartość waluty wejściowej
+
+            // Pobieramy kurs wybranej waluty
+            fetch('https://api.exchangerate-api.com/v4/latest/' + srcCurrency)
+                .then(response => response.json())
+                .then(data =>
+                {
+                    const exchangeRate = data.rates[desCurrency]; // Pobieramy kurs dla wybranej waluty docelowej
+
+                    // Wyliczamy wartość waluty docelowej
+                    const result = amount * exchangeRate;
+
+                    kursParagraph.textContent = `${amount} ${srcCurrency} kosztuje ${result.toFixed(2)} ${desCurrency} po kursie ${exchangeRate} za 1 ${srcCurrency}`;
+                })
+                .catch(error => {
+                    console.log("Wystąpił błąd podczas pobierania kursu:", error);
+                });
         });
-    </script>
-    <?php
-        mysqli_close($dbconn);
-    ?>
+    });
+</script>
+
+<?php
+    mysqli_close($dbconn);
+?>
 </body>
 </html>
