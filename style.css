@@ -1,0 +1,44 @@
+html, body {
+    margin: 0;
+}
+
+.clr {
+    clear: both;
+    height: 0;
+}
+
+.baner1 {
+    height: 150px;
+    width: 25%;
+    background-color: aqua;
+    float: left;
+}
+
+.baner2 {
+    height: 150px;
+    width: 75%;
+    background-color: aqua;
+    float: left;
+}
+
+.lewy {
+    background-color: brown;
+    float: left;
+    height: 450px;
+    width: 40%;
+}
+
+.prawy {
+    background-color: brown;
+    float: left;
+    height: 450px;
+    width: 60%;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    padding: 10px;
+}
