@@ -7,16 +7,17 @@ Michał Otrząsek 10%
 
 HTML 
 Michał Otrząsek 80%  
-Mateusz Bathelt 20% (Poprawki, dopasowanie do prawidłowego działania PHP)
+Mateusz Bathelt 15% (dopasowanie do prawidłowego działania PHP, dodatki)
+Maja Stanclik 5% (drobne poprawki)
 
 CSS 
-Michał Otrząsek 25% (Szkic + szkielet)
-Maja Stanclik 75%
+Michał Otrząsek 10% (Wstępny wygląd)
+Maja Stanclik 90% (Finalny wygląd)
 
 SQL + Baza Danych
 Mateusz Bathelt 90%
 Michał Otrząsek 10%
 
 JS 
-Michał Otrząsek 90%
-Mateusz Bathelt 10% (Lekka pomoc w opracowywaniu skryptów)
+Michał Otrząsek 95%
+Mateusz Bathelt 5% (Lekka pomoc w opracowywaniu skryptów)
