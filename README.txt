@@ -11,8 +11,9 @@ Mateusz Bathelt 15% (dopasowanie do prawidłowego działania PHP, dodatki)
 Maja Stanclik 5% (drobne poprawki)
 
 CSS 
-Michał Otrząsek 10% (Wstępny wygląd)
-Maja Stanclik 90% (Finalny wygląd)
+Michał Otrząsek 5% (Wstępny wygląd/szkielet)
+Maja Stanclik 50%
+Wojtek Sadowski 45%
 
 SQL + Baza Danych
 Mateusz Bathelt 90%
